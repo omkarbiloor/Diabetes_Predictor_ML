@@ -1,1 +1,58 @@
-<h1>Welcome to the Diabetes Prediction</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Diabetes Prediction</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, rgb(0, 191, 255), rgb(255, 105, 180));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      animation: backgroundShift 10s infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% { background: linear-gradient(135deg, rgb(0, 191, 255), rgb(255, 105, 180)); }
+      100% { background: linear-gradient(135deg, rgb(123, 104, 238), rgb(60, 179, 113)); }
+    }
+
+    h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    a.button {
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      background-color: white;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    a.button:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Diabetes Prediction</h1>
+  <a href="home.html" class="button">Start Prediction</a>
+</body>
+</html>
