@@ -79,11 +79,8 @@ def predict_datapoint():
 
     prediction = diabetes_predictor.predict(new_data_scaled)[0]
 
-    if prediction == 1:
-        result = "Positive: The person is likely diabetic."
-    else:
-        result = "Negative: The person is likely not diabetic."
-
+    result = "Positive" if prediction == 1 else "Negative"
+    
     return render_template("result.html", result=result)
 
 if __name__ == "__main__":
