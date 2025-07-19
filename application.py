@@ -70,14 +70,11 @@ def predict_datapoint():
     Bloodpressure = float(request.form['Bloodpressure'])
     Skinthickness = float(request.form['Skinthickness'])
     Insulin = float(request.form['Insulin'])
-     BMI = float(request.form['BMI'])
+    BMI=float(request.form['BMI'])
     DiabetesPedigreeFunction = float(request.form['DiabetesPedigreeFunction'])
     Age = float(request.form['Age'])
 
-    input_data = [[
-        Pregnancies, Glucose, Bloodpressure, Skinthickness,
-        Insulin, BMI, DiabetesPedigreeFunction, Age
-    ]]
+    input_data = [[Pregnancies, Glucose, Bloodpressure, Skinthickness,Insulin, BMI, DiabetesPedigreeFunction, Age]]
     new_data_scaled = standard_scaler.transform(input_data)
 
     prediction = diabetes_predictor.predict(new_data_scaled)[0]
