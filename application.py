@@ -1,45 +1,59 @@
-from flask import Flask, jsonify, request, send_from_directory, render_template
-import pandas as pd
+from flask import Flask, render_template, request
 import numpy as np
-import joblib
-from joblib import load
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+import pandas as pd
+import pickle
+import os
 
-application = Flask(__name__)
-app = application
+app = Flask(__name__)
 
-diabetes_predictor = joblib.load('models/diabetes_model.pkl')
-standard_scaler = joblib.load('models/scaler.pkl')
+# Load model and scaler
+model_path = os.path.join('model', 'model.pkl')
+scaler_path = os.path.join('model', 'scaler.pkl')
+diabetes_predictor = pickle.load(open(model_path, 'rb'))
+scaler = pickle.load(open(scaler_path, 'rb'))
 
-@app.route("/")
+@app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route("/home",methods=["GET"])
+@app.route('/home')
 def home():
-    return render_template("home.html")
+    return render_template('home.html')
 
-@app.route("/predictdata", methods=["GET","POST"])
+@app.route('/predictdata', methods=['POST'])
 def predict_datapoint():
-    Pregnancies = float(request.form['Pregnancies'])
-    Glucose = float(request.form['Glucose'])
-    Bloodpressure = float(request.form['Bloodpressure'])
-    Skinthickness = float(request.form['Skinthickness'])
-    Insulin = float(request.form['Insulin'])
-    BMI = float(request.form['BMI'])
-    DiabetesPedigreeFunction = float(request.form['DiabetesPedigreeFunction'])
-    Age = float(request.form['Age'])
+    if request.method == 'POST':
+        try:
+            # Get form data
+            Pregnancies = float(request.form['Pregnancies'])
+            Glucose = float(request.form['Glucose'])
+            Bloodpressure = float(request.form['Bloodpressure'])
+            Skinthickness = float(request.form['Skinthickness'])
+            Insulin = float(request.form['Insulin'])
+            BMI = float(request.form['BMI'])
+            DiabetesPedigreeFunction = float(request.form['DiabetesPedigreeFunction'])
+            Age = float(request.form['Age'])
 
-    input_data = [[
-        Pregnancies, Glucose, Bloodpressure, Skinthickness,
-        Insulin, BMI, DiabetesPedigreeFunction, Age
-    ]]
-    new_data_scaled = standard_scaler.transform(input_data)
+            # Create DataFrame
+            new_data = pd.DataFrame([[Pregnancies, Glucose, Bloodpressure, Skinthickness,
+                                      Insulin, BMI, DiabetesPedigreeFunction, Age]],
+                                    columns=['Pregnancies', 'Glucose', 'Bloodpressure', 'Skinthickness',
+                                             'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age'])
 
-    prediction = diabetes_predictor.predict(new_data_scaled)[0]
-    result = "Positive" if prediction == 1 else "Negative"
-    return render_template('result.html', result=result)
-    
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+            # Scale data
+            new_data_scaled = scaler.transform(new_data)
+
+            # Predict
+            prediction = diabetes_predictor.predict(new_data_scaled)
+
+            # Result based on prediction
+            if prediction[0] == 1:
+                result = "Positive: The person is likely diabetic."
+            else:
+                result = "Negative: The person is likely not diabetic."
+
+            # Show result in result.html
+            return render_template('result.html', results=result)
+        
+        except Exception as e:
+            return f"Something went wrong: {e}"
