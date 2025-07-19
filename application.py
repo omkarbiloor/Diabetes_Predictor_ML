@@ -70,7 +70,7 @@ def predict_datapoint():
     Bloodpressure = float(request.form['Bloodpressure'])
     Skinthickness = float(request.form['Skinthickness'])
     Insulin = float(request.form['Insulin'])
-    BMI = float(request.form['BMI'])
+     BMI = float(request.form['BMI'])
     DiabetesPedigreeFunction = float(request.form['DiabetesPedigreeFunction'])
     Age = float(request.form['Age'])
 
