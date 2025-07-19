@@ -20,7 +20,7 @@ def index():
 def home():
     return render_template("home.html")
 
-@app.route("/predictdata", methods=["POST"])
+@app.route("/predictdata", methods=["GET","POST"])
 def predict_datapoint():
     Pregnancies = float(request.form['Pregnancies'])
     Glucose = float(request.form['Glucose'])
