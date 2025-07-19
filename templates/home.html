@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diabetes Prediction for Women</title>
+</head>
+<body>
+    <h1>Diabetes Prediction for Women</h1>
+    <form action="{{url_for('predict_datapoint')}}" method="post">
+        <input type="number"  name="Pregnancies" step="1" placeholder="Number of Pregnancies" required><br><br>
+        <input type="number" name="Glucose" step="any" placeholder="Glucose Level" required><br><br>
+        <input type="number" name="Bloodpressure" step="any" placeholder="Blood Pressure (mm Hg)" required><br><br>
+        <input type="number"  name="Skinthickness" step="any" placeholder="Skin Thickness (mm)" required><br><br>
+        <input type="number"  name="Insulin" step="any" placeholder="Insulin Level (mu U/ml)" required><br><br>
+        <input type="number"  name="BMI" step="any" placeholder="BMI (Body Mass Index)" required><br><br>
+        <input type="number" name="DiabetesPedigreeFunction" step="any" placeholder="Diabetes Pedigree Function" required><br><br>
+        <input type="number" name="Age" step="1" placeholder="Age" required><br><br>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+    <h2>
+        THE Diabetes Prediction is {{results}}
+    </h2>
+</body>
+</html>

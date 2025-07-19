@@ -1,0 +1,34 @@
+﻿# 🚀 Essential build tools (must be on top for Render)
+setuptools>=42
+wheel>=0.36.2
+pip>=21.0
+
+# 🌐 Flask Backend
+Flask==3.0.3
+Flask-Cors==3.0.10
+gunicorn==22.0.0
+python-dotenv==1.0.1
+
+# 🧠 Machine Learning
+scikit-learn==1.2.2
+joblib==1.4.2
+scipy==1.14.0
+numpy==1.25.2
+pandas==2.0.3
+
+# 🧱 Flask Template Engine + Utilities
+Jinja2==3.1.4
+MarkupSafe==2.1.5
+itsdangerous==2.2.0
+Werkzeug==3.0.3
+
+# 🧩 Required dependencies
+colorama==0.4.6
+click==8.1.7
+blinker==1.8.2
+packaging==24.1
+python-dateutil==2.9.0.post0
+pytz==2024.1
+six==1.16.0
+threadpoolctl==3.5.0
+tzdata==2024.1
