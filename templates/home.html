@@ -12,26 +12,26 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      animation: backgroundMove 8s infinite alternate;
+      animation: gradientShift 10s ease-in-out infinite alternate;
     }
 
-    @keyframes backgroundMove {
+    @keyframes gradientShift {
       0% { background: linear-gradient(135deg, #00c6ff, #0072ff); }
       100% { background: linear-gradient(135deg, #ff6ec4, #7873f5); }
     }
 
     .container {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.95);
       padding: 30px 40px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
       width: 100%;
-      max-width: 500px;
-      animation: fadeIn 1.2s ease-in-out;
+      max-width: 520px;
+      animation: fadeSlide 1.2s ease-out;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -39,6 +39,13 @@
       text-align: center;
       color: #333;
       margin-bottom: 25px;
+      font-size: 1.8rem;
+      animation: fadeInText 1s ease;
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; letter-spacing: 2px; }
+      100% { opacity: 1; letter-spacing: normal; }
     }
 
     form {
@@ -50,47 +57,65 @@
       padding: 12px;
       margin-bottom: 15px;
       border: 2px solid #ddd;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1rem;
-      transition: 0.3s;
+      transition: all 0.3s;
     }
 
     input:focus {
       border-color: #0072ff;
+      box-shadow: 0 0 10px rgba(0, 114, 255, 0.4);
       outline: none;
-      box-shadow: 0 0 8px rgba(0, 114, 255, 0.3);
     }
 
     button {
-      padding: 12px;
-      background-color: #0072ff;
+      padding: 14px;
+      background: linear-gradient(to right, #0072ff, #00c6ff);
       color: white;
-      border: none;
       font-size: 1.1rem;
-      border-radius: 8px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: 0.4s ease;
+      box-shadow: 0 5px 15px rgba(0,114,255,0.3);
     }
 
     button:hover {
-      background-color: #005fdd;
+      background: linear-gradient(to right, #005fdd, #00aaff);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4);
     }
 
-    h2 {
+    .result-box {
+      margin-top: 25px;
+      padding: 15px;
       text-align: center;
-      color: #333;
-      margin-top: 20px;
-      animation: resultFade 1s ease-in-out;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      font-weight: bold;
+      animation: pulseResult 1.2s ease-in-out;
     }
 
-    @keyframes resultFade {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+    .positive {
+      background-color: #ffe6e6;
+      color: #c0392b;
+      border: 2px solid #e74c3c;
+    }
+
+    .negative {
+      background-color: #e6fff2;
+      color: #2ecc71;
+      border: 2px solid #27ae60;
+    }
+
+    @keyframes pulseResult {
+      0% { transform: scale(0.95); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     @media (max-width: 600px) {
       .container {
-        margin: 10px;
+        margin: 20px;
         padding: 20px;
       }
     }
@@ -108,11 +133,14 @@
       <input type="number" name="BMI" step="any" placeholder="BMI (Body Mass Index)" required>
       <input type="number" name="DiabetesPedigreeFunction" step="any" placeholder="Diabetes Pedigree Function" required>
       <input type="number" name="Age" step="1" placeholder="Age" required>
-      <button type="submit">Predict</button>
+      <button type="submit">🔍 Predict</button>
     </form>
-    <h2>
-      The Diabetes Prediction is {{ results }}
-    </h2>
+
+    {% if results %}
+      <div class="result-box {% if 'Positive' in results %}positive{% else %}negative{% endif %}">
+        🩺 Prediction Result: {{ results }}
+      </div>
+    {% endif %}
   </div>
 </body>
 </html>
