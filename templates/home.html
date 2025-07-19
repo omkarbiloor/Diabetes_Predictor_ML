@@ -1,25 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Diabetes Prediction for Women</title>
+  <meta charset="UTF-8">
+  <title>Diabetes Prediction for Women</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: backgroundMove 8s infinite alternate;
+    }
+
+    @keyframes backgroundMove {
+      0% { background: linear-gradient(135deg, #00c6ff, #0072ff); }
+      100% { background: linear-gradient(135deg, #ff6ec4, #7873f5); }
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #0072ff;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 114, 255, 0.3);
+    }
+
+    button {
+      padding: 12px;
+      background-color: #0072ff;
+      color: white;
+      border: none;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005fdd;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-top: 20px;
+      animation: resultFade 1s ease-in-out;
+    }
+
+    @keyframes resultFade {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 10px;
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
     <h1>Diabetes Prediction for Women</h1>
-    <form action="{{url_for('predict_datapoint')}}" method="post">
-        <input type="number"  name="Pregnancies" step="1" placeholder="Number of Pregnancies" required><br><br>
-        <input type="number" name="Glucose" step="any" placeholder="Glucose Level" required><br><br>
-        <input type="number" name="Bloodpressure" step="any" placeholder="Blood Pressure (mm Hg)" required><br><br>
-        <input type="number"  name="Skinthickness" step="any" placeholder="Skin Thickness (mm)" required><br><br>
-        <input type="number"  name="Insulin" step="any" placeholder="Insulin Level (mu U/ml)" required><br><br>
-        <input type="number"  name="BMI" step="any" placeholder="BMI (Body Mass Index)" required><br><br>
-        <input type="number" name="DiabetesPedigreeFunction" step="any" placeholder="Diabetes Pedigree Function" required><br><br>
-        <input type="number" name="Age" step="1" placeholder="Age" required><br><br>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    <form action="{{ url_for('predict_datapoint') }}" method="post">
+      <input type="number" name="Pregnancies" step="1" placeholder="Number of Pregnancies" required>
+      <input type="number" name="Glucose" step="any" placeholder="Glucose Level" required>
+      <input type="number" name="Bloodpressure" step="any" placeholder="Blood Pressure (mm Hg)" required>
+      <input type="number" name="Skinthickness" step="any" placeholder="Skin Thickness (mm)" required>
+      <input type="number" name="Insulin" step="any" placeholder="Insulin Level (mu U/ml)" required>
+      <input type="number" name="BMI" step="any" placeholder="BMI (Body Mass Index)" required>
+      <input type="number" name="DiabetesPedigreeFunction" step="any" placeholder="Diabetes Pedigree Function" required>
+      <input type="number" name="Age" step="1" placeholder="Age" required>
+      <button type="submit">Predict</button>
     </form>
-
     <h2>
-        THE Diabetes Prediction is {{results}}
+      THE Diabetes Prediction is {{ results }}
     </h2>
+  </div>
 </body>
 </html>
