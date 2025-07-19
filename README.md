@@ -29,21 +29,16 @@ A simple machine learning web application that predicts whether a female patient
 
 ## 📁 Project Structure
 
-.
-├── diabetes.ipynb # Jupyter notebook for training and saving the model
-├── application.py # Flask backend
-├── models/
-│ ├── diabetes_model.pkl # Trained ML model
-│ └── scaler.pkl # Scaler used for normalization
-├── templates/
-│ ├── index.html # Welcome page
-│ └── home.html # Prediction form and results displayed here
+## .
+## ├── diabetes.ipynb # Jupyter notebook for training and saving the model
+## ├── application.py # Flask backend
+## ├── models/
+## │ ├── diabetes_model.pkl # Trained ML model
+## │ └── scaler.pkl # Scaler used for normalization
+## ├── templates/
+## │ ├── index.html # Welcome page
+## │ └── home.html # Prediction form and results displayed here
 
-yaml
-Copy
-Edit
-
----
 
 ## 📌 How It Works
 
