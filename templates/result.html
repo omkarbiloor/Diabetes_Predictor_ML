@@ -14,7 +14,7 @@
             justify-content: center;
             color: white;
             flex-direction: column;
-            animation: fadeIn 1s ease-in-out;
+            animation: fadeIn 1.2s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -41,16 +41,30 @@
         }
 
         .result-box {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.12);
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.35);
             text-align: center;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         h1 {
             font-size: 2rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+        }
+
+        .positive-text {
+            color: #ffb3b3;
+        }
+
+        .negative-text {
+            color: #b3ffd9;
         }
 
         a {
@@ -59,9 +73,10 @@
             text-decoration: none;
             color: white;
             background-color: rgba(0,0,0,0.2);
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 10px;
             transition: 0.3s;
+            font-weight: bold;
         }
 
         a:hover {
@@ -73,12 +88,14 @@
     <div class="result-box">
         <h1>
             {% if result == 'Positive' %}
-                <span class="circle red"></span> Positive: The person is likely diabetic.
+                <span class="circle red"></span>
+                <span class="positive-text">Positive: The person is likely diabetic.</span>
             {% else %}
-                <span class="circle green"></span> Negative: The person is likely not diabetic.
+                <span class="circle green"></span>
+                <span class="negative-text">Negative: The person is likely not diabetic.</span>
             {% endif %}
         </h1>
-        <a href="{{ url_for('home') }}">Back to Home</a>
+        <a href="{{ url_for('home') }}">⏮ Back to Home</a>
     </div>
 </body>
 </html>
